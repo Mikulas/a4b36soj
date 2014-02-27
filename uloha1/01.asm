@@ -1,8 +1,3 @@
-;  todo
-;pushe
-;callfar
-;pushe
-;potom pop
 org 7c00h
 	push dx
 	push cx
@@ -21,27 +16,26 @@ org 7c00h
 	jmp 0:start
 
 start
-	xor ax,ax ;set segments to known values
-	; mov sp,7e00h
-	; mov ss,ax
+	mov sp,7e00h
+	xor ax,ax
+	mov ss,ax
 	mov ds,ax
-	mov al,3 ;set VGA mode 80x25
+	mov al,3
 	int 10h
 	cld
-	xor di,di
-
-	mov ax,text
-	mov si,ax
 
 	mov ax,0b800h
 	mov es,ax
 
-	mov ah,09h
+	xor di,di
+	mov ax,text
+	mov si,ax
 
-	mov cx,14 ;counter
+	mov ah,09h
+	mov cx,14
 printLoop
-	lodsb ;load first byte of label to al
-	stosw ;store full ax
+	lodsb
+	stosw
 	lodsb
 	stosw
 	mov al,':'
@@ -61,19 +55,16 @@ printLoop
 	jmp $
 
 printDh
-  ;set al to top 4 bits of dh
 	mov bh,dh
 	shr bh,4
-  ;print higher 4 bits
   	mov al,bh
 	call alToAscii
-	stosw ;store ax in es:di
-  ;print lower 4 bits
+	stosw
 	sal bh,4
-	mov al,dh ; 100011b
-	sub al,bh ;-100000b get lower 4 bits of dh
+	mov al,dh
+	sub al,bh
 	call alToAscii
-	stosw ;store ax in es:di
+	stosw
 	ret
 
 alToAscii
@@ -87,6 +78,5 @@ alToAscii
 
 text db "SIDIBPSPIPCSDSESSSFLAXBXCXDX",0
 
-;bootsector
 times 1feh - ($ - $$) db 0
 db 055h, 0aah
