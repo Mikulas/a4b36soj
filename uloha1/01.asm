@@ -1,3 +1,4 @@
+; a4b36soj Mikulas Dite uloha1
 org 7c00h
 	push dx
 	push cx
@@ -30,7 +31,6 @@ start
 	mov si,ax
 
 	mov ah,09h
-	; mov cx,14
 printLoop
 	lodsb
 	stosw
