@@ -36,7 +36,7 @@ start
 	mov ax,0b800h
 	mov es,ax
 
-	mov ah,0f1h
+	mov ah,09h
 
 	mov cx,14 ;counter
 printLoop
@@ -53,6 +53,8 @@ printLoop
 	call printDh
 	mov al,' '
 	stosw
+
+	add ah,9h
 
 	dec cx
 	jnz printLoop
@@ -83,8 +85,7 @@ alToAscii
 		add al,'A'-0Ah
 	ret
 
-times 200h - 60 - ($ - $$) db 0
-text db "SIDIBPSPIPCSDSESSSFLAXBXCXDX",0 ;7dc4
+text db "SIDIBPSPIPCSDSESSSFLAXBXCXDX",0
 
 ;bootsector
 times 1feh - ($ - $$) db 0
