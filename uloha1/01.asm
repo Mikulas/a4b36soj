@@ -30,7 +30,7 @@ start
 	mov si,ax
 
 	mov ah,09h
-	mov cx,14
+	; mov cx,14
 printLoop
 	lodsb
 	stosw
@@ -48,8 +48,8 @@ printLoop
 
 	add ah,9h
 
-	dec cx
-	jnz printLoop
+	cmp di,0e0h
+	jb printLoop
 	jmp $
 
 printDh
