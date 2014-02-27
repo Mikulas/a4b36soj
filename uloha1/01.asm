@@ -68,13 +68,11 @@ printDh
 	ret
 
 alToAscii
-	cmp al,0Ah
-	jae .letter
-		add al,'0'
-		ret
-	.letter
-		add al,'A'-0Ah
-	ret
+	add al,'0'
+	cmp al,0Ah + '0'
+	jb .ret
+		add al,7h
+	.ret ret
 
 text db "SIDIBPSPIPCSDSESSSFLAXBXCXDX",0
 
