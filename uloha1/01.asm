@@ -13,12 +13,10 @@ org 7c00h
 	push bp
 	push di
 	push si
-	jmp 0:start
+jmp 0:start
 
 start
-	mov sp,7e00h
 	xor ax,ax
-	mov ss,ax
 	mov ds,ax
 	mov al,3
 	int 10h
