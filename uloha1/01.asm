@@ -56,21 +56,21 @@ printDh
 	mov bh,dh
 	shr bh,4
   	mov al,bh
-	call alToAscii
-	stosw
+	call printAscii
 	sal bh,4
 	mov al,dh
 	sub al,bh
-	call alToAscii
-	stosw
+	call printAscii
 	ret
 
-alToAscii
+printAscii
 	add al,'0'
 	cmp al,0Ah + '0'
 	jb .ret
 		add al,7h
-	.ret ret
+	.ret
+	stosw
+	ret
 
 text db "SIDIBPSPIPCSDSESSSFLAXBXCXDX",0
 
