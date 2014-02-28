@@ -60,9 +60,6 @@ printDh
 	sal bh,4
 	mov al,dh
 	sub al,bh
-	call printAscii
-	ret
-
 printAscii
 	add al,'0'
 	cmp al,0Ah + '0'
