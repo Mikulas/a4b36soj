@@ -38,9 +38,32 @@ cycleAx lodsb
 	stosw
 
 	pop dx
-	call printDh
+
+	mov bx,2
+printDh mov bh,dh
+	dec bx
+	shr bh,4
+  	mov al,bh
+
+  	mov cx,2
+	printAl add al,'0'
+		cmp al,0Ah + '0'
+		jb .end
+	            add al,7h
+	   .end stosw
+
+	sal bh,4
+	mov al,dh
+	sub al,bh
+
+	loop printAl
+
+
 	mov dh,dl
-	call printDh
+	and bx,bx
+	jnz printDh
+
+
 	mov al,' '
 	stosw
 
@@ -49,20 +72,6 @@ cycleAx lodsb
 	cmp di,0e0h
 	jb cycleAx
 	jmp $
-
-printDh mov bh,dh
-	shr bh,4
-  	mov al,bh
-	call printAl
-	sal bh,4
-	mov al,dh
-	sub al,bh
-printAl add al,'0'
-	cmp al,0Ah + '0'
-	jb .end
-            add al,7h
-   .end stosw
-	ret
 
 text db "SIDIBPSPIPCSDSESSSFLAXBXCXDX",0
 
