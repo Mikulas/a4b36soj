@@ -14,10 +14,9 @@ org 7c00h
 	push bp
 	push di
 	push si
-jmp 0:start
+	jmp 0:starter
 
-start
-	xor ax,ax
+starter xor ax,ax
 	mov ds,ax
 	mov al,3
 	int 10h
@@ -31,8 +30,7 @@ start
 	mov si,ax
 
 	mov ah,09h
-printLoop
-	lodsb
+cycleAx lodsb
 	stosw
 	lodsb
 	stosw
@@ -49,24 +47,21 @@ printLoop
 	add ah,9h
 
 	cmp di,0e0h
-	jb printLoop
+	jb cycleAx
 	jmp $
 
-printDh
-	mov bh,dh
+printDh mov bh,dh
 	shr bh,4
   	mov al,bh
-	call printAscii
+	call printAl
 	sal bh,4
 	mov al,dh
 	sub al,bh
-printAscii
-	add al,'0'
+printAl add al,'0'
 	cmp al,0Ah + '0'
-	jb .ret
-		add al,7h
-	.ret
-	stosw
+	jb .end
+            add al,7h
+   .end stosw
 	ret
 
 text db "SIDIBPSPIPCSDSESSSFLAXBXCXDX",0
