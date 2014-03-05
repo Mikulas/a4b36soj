@@ -1,5 +1,6 @@
 ; a4b36soj Mikulas Dite uloha1
 org 7c00h
+	push sp
 	push dx
 	push cx
 	push bx
@@ -10,13 +11,14 @@ org 7c00h
 	push ds
 	push cs
 	push $$ ;ip
-	push sp
+	
 	push bp
+
 	push di
 	push si
-	jmp 0:starter
+	jmp 0:start
 
-starter xor ax,ax
+start xor ax,ax
 	mov ds,ax
 	mov al,3
 	int 10h
@@ -73,7 +75,7 @@ printDh mov bh,dh
 	jb cycleAx
 	jmp $
 
-text db "SIDIBPSPIPCSDSESSSFLAXBXCXDX",0
+text db "SIDIBPIPCSDSESSSFLAXBXCXDXSP",0
 
 times 1feh - ($ - $$) db 0
 db 055h, 0aah
