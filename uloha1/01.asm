@@ -3,7 +3,9 @@
 org 7c00h
 	call pushIp ;saves ip+call
 pushIp  push sp ;saves sp+2
-	push bp
+	push cs
+	jmp 0:start
+start push bp
 	push dx
 	push cx
 	push bx
@@ -12,12 +14,11 @@ pushIp  push sp ;saves sp+2
 	push ss
 	push es
 	push ds
-	push cs
+	
 	push di
 	push si
-	jmp 0:start
 
-start xor ax,ax
+	xor ax,ax
 	mov ds,ax
 	mov al,3
 	int 10h
@@ -74,7 +75,7 @@ printDh mov bh,dh
 	jb cycleAx
 	jmp $
 
-text db "SIDICSDSESSSFLAXBXCXDXBPSPIP",0
+text db "SIDIDSESSSFLAXBXCXDXBPCSSPIP",0
 
 times 1feh - ($ - $$) db 0
 db 055h, 0aah
