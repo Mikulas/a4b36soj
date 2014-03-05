@@ -1,8 +1,8 @@
 ; a4b36soj Mikulas Dite uloha1
 ; jmp $
 org 7c00h
-	call pushIp ;saves ip+call
-pushIp  push sp ;saves sp+2
+	call pushIp ;saves ip+3
+pushIp push sp ;saves sp-2
 	push cs
 	jmp 0:start
 start push bp
@@ -17,6 +17,14 @@ start push bp
 	
 	push di
 	push si
+
+	; fix ip
+	mov bp, sp
+	sub word [bp + 26], 3
+
+	; fix sp
+	mov bp, sp
+	add word [bp + 24], 2
 
 	xor ax,ax
 	mov ds,ax
