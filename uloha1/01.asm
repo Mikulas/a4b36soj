@@ -1,6 +1,9 @@
 ; a4b36soj Mikulas Dite uloha1
+; jmp $
 org 7c00h
-	push sp
+	call pushIp ;saves ip+call
+pushIp  push sp ;saves sp+2
+	push bp
 	push dx
 	push cx
 	push bx
@@ -10,10 +13,6 @@ org 7c00h
 	push es
 	push ds
 	push cs
-	push $$ ;ip
-	
-	push bp
-
 	push di
 	push si
 	jmp 0:start
@@ -75,7 +74,7 @@ printDh mov bh,dh
 	jb cycleAx
 	jmp $
 
-text db "SIDIBPIPCSDSESSSFLAXBXCXDXSP",0
+text db "SIDICSDSESSSFLAXBXCXDXBPSPIP",0
 
 times 1feh - ($ - $$) db 0
 db 055h, 0aah
